@@ -19,33 +19,42 @@
 
     <div class="app-shell">
       <header class="topbar">
-        <div class="brand-lockup" aria-label="Spring Boot Architect Gym">
+        <div class="brand-lockup" aria-label="Spring Boot Architect Gym" data-i18n-aria-label="brandAria">
           <div class="brand-mark" aria-hidden="true">SB</div>
           <div>
-            <p class="eyebrow">Interactive Spring Boot learning</p>
-            <h1>Architect Gym</h1>
+            <p class="eyebrow" data-i18n="brandEyebrow">Interactive Spring Boot learning</p>
+            <h1 data-i18n="brandTitle">Architect Gym</h1>
           </div>
         </div>
 
         <div class="topbar-actions">
+          <div class="language-switcher" role="group" aria-label="Language" data-i18n-aria-label="languageAria">
+            <button class="language-button" type="button" data-language="en">EN</button>
+            <button class="language-button" type="button" data-language="zh-CN">简中</button>
+          </div>
           <label class="search-box">
-            <span class="visually-hidden">Search lessons and dependencies</span>
-            <input id="global-search" type="search" placeholder="Search boot, test, config...">
+            <span class="visually-hidden" data-i18n="searchLabel">Search lessons and dependencies</span>
+            <input
+              id="global-search"
+              type="search"
+              placeholder="Search boot, test, config..."
+              data-i18n-placeholder="searchPlaceholder"
+            >
           </label>
-          <button id="reset-progress" class="ghost-button" type="button">Reset</button>
-          <button id="export-plan" class="primary-button" type="button">Copy Plan</button>
+          <button id="reset-progress" class="ghost-button" type="button" data-i18n="resetProgress">Reset</button>
+          <button id="export-plan" class="primary-button" type="button" data-i18n="exportPlan">Copy Plan</button>
         </div>
       </header>
 
       <main class="workspace">
-        <aside class="side-rail" aria-label="Curriculum">
+        <aside class="side-rail" aria-label="Curriculum" data-i18n-aria-label="curriculumAria">
           <section class="rail-panel">
             <div class="progress-visual">
               <div id="progress-ring" class="progress-ring" aria-hidden="true">
                 <span id="progress-number">0%</span>
               </div>
               <div>
-                <p class="metric-label">Practice progress</p>
+                <p class="metric-label" data-i18n="progressLabel">Practice progress</p>
                 <p id="progress-copy" class="metric-copy">0 of 0 checkpoints complete</p>
               </div>
             </div>
@@ -53,8 +62,8 @@
 
           <section class="rail-panel compact">
             <div class="section-heading">
-              <p class="eyebrow">Tracks</p>
-              <h2>Rookie to architect</h2>
+              <p class="eyebrow" data-i18n="tracksEyebrow">Tracks</p>
+              <h2 data-i18n="tracksTitle">Rookie to architect</h2>
             </div>
             <div id="module-list" class="module-list"></div>
           </section>
@@ -62,13 +71,13 @@
 
         <section class="main-stage" aria-live="polite">
           <div class="stage-toolbar">
-            <div class="segmented-control" role="tablist" aria-label="Learning views">
-              <button class="tab-button active" type="button" data-view="learn" role="tab">Learn</button>
-              <button class="tab-button" type="button" data-view="practice" role="tab">Practice</button>
-              <button class="tab-button" type="button" data-view="radar" role="tab">Radar</button>
-              <button class="tab-button" type="button" data-view="lab" role="tab">Lab</button>
+            <div class="segmented-control" role="tablist" aria-label="Learning views" data-i18n-aria-label="learningViewsAria">
+              <button class="tab-button active" type="button" data-view="learn" role="tab" data-i18n="tabLearn">Learn</button>
+              <button class="tab-button" type="button" data-view="practice" role="tab" data-i18n="tabPractice">Practice</button>
+              <button class="tab-button" type="button" data-view="radar" role="tab" data-i18n="tabRadar">Radar</button>
+              <button class="tab-button" type="button" data-view="lab" role="tab" data-i18n="tabLab">Lab</button>
             </div>
-            <div class="version-note">
+            <div class="version-note" data-i18n="versionNote">
               Spring Boot docs checked 2026-05-24
             </div>
           </div>
@@ -79,40 +88,47 @@
           <div id="view-lab" class="view"></div>
         </section>
 
-        <aside class="coach-panel" aria-label="LLM coach">
+        <aside class="coach-panel" aria-label="LLM coach" data-i18n-aria-label="coachAria">
           <section class="coach-card">
             <div class="section-heading">
-              <p class="eyebrow">LLM help</p>
-              <h2>Coach, not autopilot</h2>
+              <p class="eyebrow" data-i18n="coachEyebrow">LLM help</p>
+              <h2 data-i18n="coachTitle">Coach, not autopilot</h2>
             </div>
-            <div class="mode-grid" role="group" aria-label="Coach mode">
-              <button class="mode-button active" type="button" data-mode="socratic">Hint</button>
-              <button class="mode-button" type="button" data-mode="review">Review</button>
-              <button class="mode-button" type="button" data-mode="pair">Pair</button>
+            <div class="mode-grid" role="group" aria-label="Coach mode" data-i18n-aria-label="coachModeAria">
+              <button class="mode-button active" type="button" data-mode="socratic" data-i18n="modeSocratic">Hint</button>
+              <button class="mode-button" type="button" data-mode="review" data-i18n="modeReview">Review</button>
+              <button class="mode-button" type="button" data-mode="pair" data-i18n="modePair">Pair</button>
             </div>
-            <textarea id="coach-prompt" readonly spellcheck="false" aria-label="Generated LLM prompt"></textarea>
+            <textarea
+              id="coach-prompt"
+              readonly
+              spellcheck="false"
+              aria-label="Generated LLM prompt"
+              data-i18n-aria-label="coachPromptAria"
+            ></textarea>
             <div class="button-row">
-              <button id="copy-prompt" class="primary-button" type="button">Copy Prompt</button>
-              <button id="shuffle-drill" class="ghost-button" type="button">New Drill</button>
+              <button id="copy-prompt" class="primary-button" type="button" data-i18n="copyPrompt">Copy Prompt</button>
+              <button id="shuffle-drill" class="ghost-button" type="button" data-i18n="shuffleDrill">New Drill</button>
             </div>
             <p id="copy-status" class="copy-status" role="status"></p>
           </section>
 
           <section class="coach-card">
             <div class="section-heading">
-              <p class="eyebrow">Current drill</p>
+              <p class="eyebrow" data-i18n="currentDrillEyebrow">Current drill</p>
               <h2 id="coach-drill-title">Choose a module</h2>
             </div>
             <p id="coach-drill-copy" class="muted-copy"></p>
             <div class="timer-box">
               <span id="timer-display">15:00</span>
-              <button id="start-timer" class="ghost-button" type="button">Start</button>
+              <button id="start-timer" class="ghost-button" type="button" data-i18n="timerStart">Start</button>
             </div>
           </section>
         </aside>
       </main>
     </div>
 
+    <script src="i18n.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

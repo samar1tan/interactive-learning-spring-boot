@@ -146,9 +146,34 @@ p {
 
 .topbar-actions {
   display: grid;
-  grid-template-columns: minmax(180px, 360px) auto auto;
+  grid-template-columns: auto minmax(180px, 360px) auto auto;
   gap: 10px;
   align-items: center;
+}
+
+.language-switcher {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(42px, 1fr));
+  gap: 4px;
+  min-width: 94px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.language-button {
+  min-height: 34px;
+  padding: 0 8px;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.language-button.active {
+  background: var(--ink);
+  color: #ffffff;
 }
 
 .search-box {
@@ -1014,7 +1039,7 @@ p {
   }
 
   .topbar-actions {
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
   }
 
   .workspace {
@@ -1050,6 +1075,10 @@ p {
 
   .topbar-actions {
     grid-template-columns: 1fr;
+  }
+
+  .language-switcher {
+    width: 100%;
   }
 
   .stage-toolbar {

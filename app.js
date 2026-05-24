@@ -741,9 +741,161 @@ const SCENARIOS = [
   },
 ];
 
+const UI_EN = {
+  metaTitle: "Spring Boot Architect Gym",
+  metaDescription:
+    "An interactive Spring Boot learning gym for entry-level Java engineers who want hands-on practice and architecture judgment in the AI coding era.",
+  brandAria: "Spring Boot Architect Gym",
+  brandEyebrow: "Interactive Spring Boot learning",
+  brandTitle: "Architect Gym",
+  languageAria: "Language",
+  searchLabel: "Search lessons and dependencies",
+  searchPlaceholder: "Search boot, test, config...",
+  resetProgress: "Reset",
+  exportPlan: "Copy Plan",
+  curriculumAria: "Curriculum",
+  progressLabel: "Practice progress",
+  progressCopy: "{done} of {total} checkpoints complete",
+  tracksEyebrow: "Tracks",
+  tracksTitle: "Rookie to architect",
+  learningViewsAria: "Learning views",
+  tabLearn: "Learn",
+  tabPractice: "Practice",
+  tabRadar: "Radar",
+  tabLab: "Lab",
+  versionNote: "Spring Boot docs checked 2026-05-24",
+  coachAria: "LLM coach",
+  coachEyebrow: "LLM help",
+  coachTitle: "Coach, not autopilot",
+  coachModeAria: "Coach mode",
+  modeSocratic: "Hint",
+  modeReview: "Review",
+  modePair: "Pair",
+  coachPromptAria: "Generated LLM prompt",
+  copyPrompt: "Copy Prompt",
+  shuffleDrill: "New Drill",
+  currentDrillEyebrow: "Current drill",
+  emptyDrillTitle: "Choose a module",
+  timerStart: "Start",
+  timerPause: "Pause",
+  complete: "Complete",
+  incomplete: "Incomplete",
+  doneMark: "OK",
+  checks: "checks",
+  min: "min",
+  noModuleMatches: "No modules match the current search.",
+  track: "Track",
+  architectMove: "Architect move:",
+  runtimeMapAria: "Runtime concept map",
+  snapshot: "Snapshot",
+  currentBaseline: "Current baseline",
+  stableDocs: "Stable docs",
+  javaBaseline: "Java baseline",
+  mentalModel: "Mental model",
+  understandBeforeTyping: "What to understand before typing",
+  handsDirty: "Hands dirty",
+  checkpointChecklist: "Checkpoint checklist",
+  quickQuiz: "Quick quiz",
+  checkInstinct: "Check the instinct",
+  minuteSession: "{minutes} minute session",
+  scenario: "Scenario",
+  deliverable: "Deliverable",
+  constraints: "Constraints",
+  scratchpad: "Your scratchpad",
+  selfScore: "Self score",
+  selfScoreAria: "Self score",
+  copyDrill: "Copy Drill",
+  hideReview: "Hide Review",
+  revealReview: "Reveal Review",
+  mentorReview: "Mentor review:",
+  all: "All",
+  learnNow: "Learn now",
+  later: "Later",
+  aiEra: "AI era",
+  history: "History",
+  dependencyRadar: "Dependency radar",
+  dependencyRadarSubtitle: "What to learn, what to postpone, what to only recognize",
+  dependencyFiltersAria: "Dependency filters",
+  noDependencyMatches: "No dependencies match the current filters.",
+  architectQuestion: "Architect question:",
+  watch: "Watch:",
+  categoryCore: "core",
+  categoryLater: "later",
+  categoryAi: "ai",
+  categoryLegacy: "legacy",
+  architectureLab: "Architecture lab",
+  choosePressureTest: "Choose a pressure test",
+  decisionBoard: "Decision board",
+  recommendedFirstDecision: "Recommended first decision:",
+  adrDrill: "ADR drill",
+  adrDrillCopy:
+    "Write context, decision, consequences, and rejected alternatives. Then ask the LLM coach for review mode and make it challenge your weakest assumption.",
+  copied: "Copied.",
+  practiceCopied: "Practice drill copied.",
+  promptCopied: "Coach prompt copied.",
+  planCopied: "Learning plan copied.",
+  resetConfirm: "Reset local progress and notes for this browser?",
+  practiceCopyModule: "Module:",
+  practiceCopyTimebox: "Timebox: {minutes} minutes",
+  practiceCopyScenario: "## Scenario",
+  practiceCopyDeliverable: "## Deliverable",
+  practiceCopyConstraints: "## Constraints",
+  practiceCopyStarter: "## Starter",
+  planTitle: "# Spring Boot Architect Gym Plan",
+  planProgress: "Progress: {done}/{total} checkpoints",
+  planCurrentModule: "Current module: {title}",
+  planNextCheckpoint: "Next checkpoint: {title}",
+  planPracticeDrill: "Practice drill: {title}",
+  planTrackStatus: "## Track status",
+  planNext30: "## Next 30 minutes",
+  planStep1: "1. Review the current module mental model.",
+  planStep2: "2. Complete checkpoint: {title}.",
+  planStep3: "3. Run the drill: {title}.",
+  planStep4: "4. Paste the coach prompt into your LLM and ask for review.",
+  planCoachPrompt: "## Coach prompt",
+  coachPromptShared: [
+    "You are my Spring Boot learning coach.",
+    "Audience: entry-level Java engineer learning to think like an architect in the AI coding era.",
+    "Module: {moduleTitle}",
+    "Mental model: {moduleTheme}",
+    "Practice scenario: {practiceScenario}",
+    "Deliverable: {practiceDeliverable}",
+    "Constraints: {practiceConstraints}",
+    "Docs snapshot: Spring Boot {springVersion}, checked {checkedOn}. Ask me to verify official docs before production version choices.",
+  ],
+  coachPromptModes: {
+    socratic: [
+      "Mode: Socratic hint.",
+      "Do not give me the full answer first.",
+      "Ask one focused question at a time.",
+      "If I am stuck, give a small hint and one concrete next action.",
+      "Keep me responsible for the architecture decision.",
+    ],
+    review: [
+      "Mode: senior code/design review.",
+      "Find missing boundaries, weak tests, unsafe defaults, unclear configuration, and production risks.",
+      "Return findings first, ordered by severity.",
+      "Suggest one small improvement I can apply in 15 minutes.",
+    ],
+    pair: [
+      "Mode: pair programmer.",
+      "Work in short steps.",
+      "Before showing code, ask me to predict the next design move.",
+      "When code appears, keep it minimal and explain which architectural decision it expresses.",
+    ],
+  },
+  coachPromptScratchpad: "My current scratchpad:",
+  coachPromptEmptyScratchpad: "My current scratchpad is empty. Start by helping me frame the work.",
+};
+
+const DEFAULT_LANGUAGE = "en";
+const SUPPORTED_LANGUAGES = window.I18N?.languages || [
+  { code: "en", label: "EN", name: "English" },
+];
 const STORE_KEY = "spring-boot-architect-gym-state-v1";
 
 const defaultState = {
+  language: detectLanguage(),
   selectedModule: MODULES[0].id,
   activeView: "learn",
   coachMode: "socratic",
@@ -764,6 +916,75 @@ let timerId = null;
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => Array.from(document.querySelectorAll(selector));
 
+function detectLanguage() {
+  const browserLanguage = navigator.language || navigator.userLanguage || DEFAULT_LANGUAGE;
+  return browserLanguage.toLowerCase().startsWith("zh") ? "zh-CN" : DEFAULT_LANGUAGE;
+}
+
+function activeLanguage() {
+  const code = state?.language || DEFAULT_LANGUAGE;
+  return SUPPORTED_LANGUAGES.some((language) => language.code === code) ? code : DEFAULT_LANGUAGE;
+}
+
+function uiText() {
+  return {
+    ...UI_EN,
+    ...(window.I18N?.ui?.[activeLanguage()] || {}),
+  };
+}
+
+function interpolate(value, replacements = {}) {
+  return String(value).replace(/\{(\w+)\}/g, (_, key) => replacements[key] ?? "");
+}
+
+function t(key, replacements = {}) {
+  return interpolate(uiText()[key] || UI_EN[key] || key, replacements);
+}
+
+function localizedContent() {
+  const content = window.I18N?.content?.[activeLanguage()] || {};
+  return {
+    docs: content.docs || DOCS_SNAPSHOT,
+    modules: content.modules || MODULES,
+    dependencies: content.dependencies || DEPENDENCIES,
+    scenarios: content.scenarios || SCENARIOS,
+  };
+}
+
+function docsSnapshot() {
+  return localizedContent().docs;
+}
+
+function modules() {
+  return localizedContent().modules;
+}
+
+function dependencies() {
+  return localizedContent().dependencies;
+}
+
+function scenarios() {
+  return localizedContent().scenarios;
+}
+
+function englishModuleById(moduleId) {
+  return MODULES.find((module) => module.id === moduleId);
+}
+
+function englishDependencyByName(name) {
+  return DEPENDENCIES.find((dependency) => dependency.name === name);
+}
+
+function categoryLabel(category) {
+  const keys = {
+    core: "categoryCore",
+    later: "categoryLater",
+    ai: "categoryAi",
+    legacy: "categoryLegacy",
+  };
+  return t(keys[category] || category);
+}
+
 function loadState() {
   try {
     const raw = localStorage.getItem(STORE_KEY);
@@ -779,11 +1000,11 @@ function saveState() {
 }
 
 function selectedModule() {
-  return MODULES.find((module) => module.id === state.selectedModule) || MODULES[0];
+  return modules().find((module) => module.id === state.selectedModule) || modules()[0];
 }
 
 function selectedScenario() {
-  return SCENARIOS.find((scenario) => scenario.id === state.selectedScenario) || SCENARIOS[0];
+  return scenarios().find((scenario) => scenario.id === state.selectedScenario) || scenarios()[0];
 }
 
 function normalize(text) {
@@ -797,6 +1018,7 @@ function matchesSearch(text) {
 }
 
 function moduleSearchText(module) {
+  const englishModule = englishModuleById(module.id);
   return [
     module.title,
     module.theme,
@@ -805,11 +1027,25 @@ function moduleSearchText(module) {
     module.lesson.join(" "),
     module.practice.title,
     module.practice.scenario,
+    englishModule?.title,
+    englishModule?.theme,
+    englishModule?.tags.join(" "),
   ].join(" ");
 }
 
 function dependencySearchText(item) {
-  return [item.name, item.phase, item.use, item.question, item.caution, item.category].join(" ");
+  const englishDependency = englishDependencyByName(item.name);
+  return [
+    item.name,
+    item.phase,
+    item.use,
+    item.question,
+    item.caution,
+    item.category,
+    englishDependency?.phase,
+    englishDependency?.use,
+    englishDependency?.question,
+  ].join(" ");
 }
 
 function completedSet(moduleId) {
@@ -817,11 +1053,11 @@ function completedSet(moduleId) {
 }
 
 function totalCheckpointCount() {
-  return MODULES.reduce((sum, module) => sum + module.checkpoints.length, 0);
+  return modules().reduce((sum, module) => sum + module.checkpoints.length, 0);
 }
 
 function completedCheckpointCount() {
-  return MODULES.reduce((sum, module) => sum + completedSet(module.id).size, 0);
+  return modules().reduce((sum, module) => sum + completedSet(module.id).size, 0);
 }
 
 function isModuleComplete(module) {
@@ -838,6 +1074,7 @@ function escapeHtml(value) {
 }
 
 function renderAll() {
+  renderStaticTranslations();
   renderTopControls();
   renderProgress();
   renderModuleList();
@@ -850,11 +1087,36 @@ function renderAll() {
   renderTimer();
 }
 
+function renderStaticTranslations() {
+  document.documentElement.lang = activeLanguage();
+  document.title = t("metaTitle");
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) metaDescription.setAttribute("content", t("metaDescription"));
+
+  $$("[data-i18n]").forEach((element) => {
+    element.textContent = t(element.dataset.i18n);
+  });
+
+  $$("[data-i18n-placeholder]").forEach((element) => {
+    element.setAttribute("placeholder", t(element.dataset.i18nPlaceholder));
+  });
+
+  $$("[data-i18n-aria-label]").forEach((element) => {
+    element.setAttribute("aria-label", t(element.dataset.i18nAriaLabel));
+  });
+}
+
 function renderTopControls() {
   const search = $("#global-search");
   if (search && search.value !== state.search) {
     search.value = state.search || "";
   }
+
+  $$(".language-button").forEach((button) => {
+    const isActive = button.dataset.language === activeLanguage();
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
 }
 
 function renderProgress() {
@@ -863,15 +1125,15 @@ function renderProgress() {
   const percent = total ? Math.round((done / total) * 100) : 0;
   $("#progress-ring").style.setProperty("--progress", `${Math.round((percent / 100) * 360)}deg`);
   $("#progress-number").textContent = `${percent}%`;
-  $("#progress-copy").textContent = `${done} of ${total} checkpoints complete`;
+  $("#progress-copy").textContent = t("progressCopy", { done, total });
 }
 
 function renderModuleList() {
   const list = $("#module-list");
-  const filtered = MODULES.filter((module) => matchesSearch(moduleSearchText(module)));
+  const filtered = modules().filter((module) => matchesSearch(moduleSearchText(module)));
 
   if (!filtered.length) {
-    list.innerHTML = `<div class="empty-state">No modules match the current search.</div>`;
+    list.innerHTML = `<div class="empty-state">${escapeHtml(t("noModuleMatches"))}</div>`;
     return;
   }
 
@@ -885,9 +1147,9 @@ function renderModuleList() {
           <span class="module-number">${module.number}</span>
           <span>
             <span class="module-title">${escapeHtml(module.title)}</span>
-            <span class="module-meta">${done}/${total} checks - ${module.minutes} min</span>
+            <span class="module-meta">${done}/${total} ${escapeHtml(t("checks"))} - ${module.minutes} ${escapeHtml(t("min"))}</span>
           </span>
-          <span class="module-check" aria-label="${complete ? "Complete" : "Incomplete"}">${complete ? "OK" : ""}</span>
+          <span class="module-check" aria-label="${complete ? escapeHtml(t("complete")) : escapeHtml(t("incomplete"))}">${complete ? escapeHtml(t("doneMark")) : ""}</span>
         </button>
       `;
     })
@@ -908,6 +1170,7 @@ function renderTabs() {
 
 function renderLearnView() {
   const module = selectedModule();
+  const docs = docsSnapshot();
   const done = completedSet(module.id);
   const quizAnswers = state.quiz[module.id] || {};
 
@@ -915,9 +1178,9 @@ function renderLearnView() {
     <div class="learn-grid">
       <section class="hero-panel">
         <div class="tag-row">
-          <span class="tag">Track ${module.number}</span>
+          <span class="tag">${escapeHtml(t("track"))} ${module.number}</span>
           <span class="tag">${escapeHtml(module.level)}</span>
-          <span class="tag">${module.minutes} min</span>
+          <span class="tag">${module.minutes} ${escapeHtml(t("min"))}</span>
           ${module.tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
         </div>
         <div>
@@ -925,8 +1188,8 @@ function renderLearnView() {
           <h2>${escapeHtml(module.title)}</h2>
         </div>
         <p class="lead-copy">${escapeHtml(module.pitch)}</p>
-        <div class="callout"><strong>Architect move:</strong> ${escapeHtml(module.architectMove)}</div>
-        <div class="architecture-map" aria-label="Runtime concept map">
+        <div class="callout"><strong>${escapeHtml(t("architectMove"))}</strong> ${escapeHtml(module.architectMove)}</div>
+        <div class="architecture-map" aria-label="${escapeHtml(t("runtimeMapAria"))}">
           ${module.flow
             .map(
               ([label, copy]) => `
@@ -942,22 +1205,22 @@ function renderLearnView() {
 
       <section class="tool-panel tool-stack">
         <div class="section-heading">
-          <p class="eyebrow">Snapshot</p>
-          <h3>Current baseline</h3>
+          <p class="eyebrow">${escapeHtml(t("snapshot"))}</p>
+          <h3>${escapeHtml(t("currentBaseline"))}</h3>
         </div>
         <div class="mini-grid">
           <div class="stat-box">
-            <span>Stable docs</span>
-            <strong>${DOCS_SNAPSHOT.currentStable}</strong>
+            <span>${escapeHtml(t("stableDocs"))}</span>
+            <strong>${docs.currentStable}</strong>
           </div>
           <div class="stat-box">
-            <span>Java baseline</span>
-            <strong>${DOCS_SNAPSHOT.javaBaseline}</strong>
+            <span>${escapeHtml(t("javaBaseline"))}</span>
+            <strong>${docs.javaBaseline}</strong>
           </div>
         </div>
-        <p class="text-block">${escapeHtml(DOCS_SNAPSHOT.note)}</p>
+        <p class="text-block">${escapeHtml(docs.note)}</p>
         <div class="source-list">
-          ${DOCS_SNAPSHOT.links
+          ${docs.links
             .map(
               (link) => `
                 <a class="source-link" href="${link.url}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>
@@ -970,16 +1233,16 @@ function renderLearnView() {
 
     <section class="lesson-panel">
       <div class="section-heading">
-        <p class="eyebrow">Mental model</p>
-        <h3>What to understand before typing</h3>
+        <p class="eyebrow">${escapeHtml(t("mentalModel"))}</p>
+        <h3>${escapeHtml(t("understandBeforeTyping"))}</h3>
       </div>
       ${module.lesson.map((paragraph) => `<p class="text-block">${escapeHtml(paragraph)}</p>`).join("")}
     </section>
 
     <section class="lesson-panel">
       <div class="section-heading">
-        <p class="eyebrow">Hands dirty</p>
-        <h3>Checkpoint checklist</h3>
+        <p class="eyebrow">${escapeHtml(t("handsDirty"))}</p>
+        <h3>${escapeHtml(t("checkpointChecklist"))}</h3>
       </div>
       <div class="checklist">
         ${module.checkpoints
@@ -1000,8 +1263,8 @@ function renderLearnView() {
 
     <section class="lesson-panel">
       <div class="section-heading">
-        <p class="eyebrow">Quick quiz</p>
-        <h3>Check the instinct</h3>
+        <p class="eyebrow">${escapeHtml(t("quickQuiz"))}</p>
+        <h3>${escapeHtml(t("checkInstinct"))}</h3>
       </div>
       <div class="quiz-list">
         ${module.quiz
@@ -1047,19 +1310,19 @@ function renderPracticeView() {
     <div class="practice-layout">
       <section class="practice-panel">
         <div class="section-heading">
-          <p class="eyebrow">${practice.minutes} minute session</p>
+          <p class="eyebrow">${escapeHtml(t("minuteSession", { minutes: practice.minutes }))}</p>
           <h3>${escapeHtml(practice.title)}</h3>
         </div>
         <div class="scenario-box">
-          <h4>Scenario</h4>
+          <h4>${escapeHtml(t("scenario"))}</h4>
           <p>${escapeHtml(practice.scenario)}</p>
         </div>
         <div class="scenario-box">
-          <h4>Deliverable</h4>
+          <h4>${escapeHtml(t("deliverable"))}</h4>
           <p>${escapeHtml(practice.deliverable)}</p>
         </div>
         <div class="scenario-box">
-          <h4>Constraints</h4>
+          <h4>${escapeHtml(t("constraints"))}</h4>
           <ul>
             ${practice.constraints.map((constraint) => `<li>${escapeHtml(constraint)}</li>`).join("")}
           </ul>
@@ -1068,12 +1331,12 @@ function renderPracticeView() {
 
       <section class="practice-panel">
         <div class="scratchpad">
-          <label for="practice-notes"><strong>Your scratchpad</strong></label>
+          <label for="practice-notes"><strong>${escapeHtml(t("scratchpad"))}</strong></label>
           <textarea id="practice-notes" spellcheck="true">${escapeHtml(note)}</textarea>
         </div>
         <div>
-          <p class="metric-label">Self score</p>
-          <div class="score-row" role="group" aria-label="Self score">
+          <p class="metric-label">${escapeHtml(t("selfScore"))}</p>
+          <div class="score-row" role="group" aria-label="${escapeHtml(t("selfScoreAria"))}">
             ${[1, 2, 3, 4, 5]
               .map(
                 (value) => `
@@ -1086,11 +1349,11 @@ function renderPracticeView() {
           </div>
         </div>
         <div class="button-row">
-          <button class="primary-button" type="button" data-copy-practice>Copy Drill</button>
-          <button class="ghost-button" type="button" data-toggle-mentor>${isMentorVisible ? "Hide Review" : "Reveal Review"}</button>
+          <button class="primary-button" type="button" data-copy-practice>${escapeHtml(t("copyDrill"))}</button>
+          <button class="ghost-button" type="button" data-toggle-mentor>${isMentorVisible ? escapeHtml(t("hideReview")) : escapeHtml(t("revealReview"))}</button>
         </div>
         <div class="mentor-answer ${isMentorVisible ? "visible" : ""}">
-          <strong>Mentor review:</strong> ${escapeHtml(practice.mentor)}
+          <strong>${escapeHtml(t("mentorReview"))}</strong> ${escapeHtml(practice.mentor)}
         </div>
       </section>
     </div>
@@ -1106,13 +1369,13 @@ function renderPracticeView() {
 
 function renderRadarView() {
   const filters = [
-    ["all", "All"],
-    ["core", "Learn now"],
-    ["later", "Later"],
-    ["ai", "AI era"],
-    ["legacy", "History"],
+    ["all", t("all")],
+    ["core", t("learnNow")],
+    ["later", t("later")],
+    ["ai", t("aiEra")],
+    ["legacy", t("history")],
   ];
-  const filtered = DEPENDENCIES.filter((item) => {
+  const filtered = dependencies().filter((item) => {
     const filterMatch = state.dependencyFilter === "all" || item.category === state.dependencyFilter;
     return filterMatch && matchesSearch(dependencySearchText(item));
   });
@@ -1121,10 +1384,10 @@ function renderRadarView() {
     <section class="radar-panel">
       <div class="dependency-toolbar">
         <div class="section-heading">
-          <p class="eyebrow">Dependency radar</p>
-          <h3>What to learn, what to postpone, what to only recognize</h3>
+          <p class="eyebrow">${escapeHtml(t("dependencyRadar"))}</p>
+          <h3>${escapeHtml(t("dependencyRadarSubtitle"))}</h3>
         </div>
-        <div class="filter-row" role="group" aria-label="Dependency filters">
+        <div class="filter-row" role="group" aria-label="${escapeHtml(t("dependencyFiltersAria"))}">
           ${filters
             .map(
               ([value, label]) => `
@@ -1145,17 +1408,17 @@ function renderRadarView() {
                     <article class="dependency-item">
                       <div class="pill-line">
                         <span class="pill ${item.category}">${escapeHtml(item.phase)}</span>
-                        <span class="pill">${escapeHtml(item.category)}</span>
+                        <span class="pill">${escapeHtml(categoryLabel(item.category))}</span>
                       </div>
                       <h4>${escapeHtml(item.name)}</h4>
                       <p>${escapeHtml(item.use)}</p>
-                      <p><strong>Architect question:</strong> ${escapeHtml(item.question)}</p>
-                      <p><strong>Watch:</strong> ${escapeHtml(item.caution)}</p>
+                      <p><strong>${escapeHtml(t("architectQuestion"))}</strong> ${escapeHtml(item.question)}</p>
+                      <p><strong>${escapeHtml(t("watch"))}</strong> ${escapeHtml(item.caution)}</p>
                     </article>
                   `,
                 )
                 .join("")
-            : `<div class="empty-state">No dependencies match the current filters.</div>`
+            : `<div class="empty-state">${escapeHtml(t("noDependencyMatches"))}</div>`
         }
       </div>
     </section>
@@ -1169,11 +1432,11 @@ function renderLabView() {
     <div class="lab-grid">
       <section class="lab-panel">
         <div class="section-heading">
-          <p class="eyebrow">Architecture lab</p>
-          <h3>Choose a pressure test</h3>
+          <p class="eyebrow">${escapeHtml(t("architectureLab"))}</p>
+          <h3>${escapeHtml(t("choosePressureTest"))}</h3>
         </div>
         <div class="scenario-list">
-          ${SCENARIOS.map(
+          ${scenarios().map(
             (item) => `
               <button class="scenario-button ${item.id === state.selectedScenario ? "active" : ""}" type="button" data-scenario="${item.id}">
                 <strong>${escapeHtml(item.title)}</strong>
@@ -1186,11 +1449,11 @@ function renderLabView() {
 
       <section class="lab-panel">
         <div class="section-heading">
-          <p class="eyebrow">Decision board</p>
+          <p class="eyebrow">${escapeHtml(t("decisionBoard"))}</p>
           <h3>${escapeHtml(scenario.title)}</h3>
         </div>
         <p class="text-block">${escapeHtml(scenario.brief)}</p>
-        <div class="callout"><strong>Recommended first decision:</strong> ${escapeHtml(scenario.decision)}</div>
+        <div class="callout"><strong>${escapeHtml(t("recommendedFirstDecision"))}</strong> ${escapeHtml(scenario.decision)}</div>
         <div class="tradeoff-board">
           ${scenario.tradeoffs
             .map(
@@ -1204,8 +1467,8 @@ function renderLabView() {
             .join("")}
         </div>
         <div class="scenario-box">
-          <h4>ADR drill</h4>
-          <p>Write context, decision, consequences, and rejected alternatives. Then ask the LLM coach for review mode and make it challenge your weakest assumption.</p>
+          <h4>${escapeHtml(t("adrDrill"))}</h4>
+          <p>${escapeHtml(t("adrDrillCopy"))}</p>
         </div>
       </section>
     </div>
@@ -1222,56 +1485,37 @@ function renderCoach() {
   });
 
   $("#coach-prompt").value = prompt;
-  $("#coach-drill-title").textContent = practice.title;
+  $("#coach-drill-title").textContent = practice.title || t("emptyDrillTitle");
   $("#coach-drill-copy").textContent = `${module.title}: ${practice.deliverable}`;
 }
 
 function buildCoachPrompt(module, mode) {
   const practice = module.practice;
+  const docs = docsSnapshot();
+  const ui = uiText();
   const note = state.notes[module.id] || "";
-  const shared = [
-    "You are my Spring Boot learning coach.",
-    "Audience: entry-level Java engineer learning to think like an architect in the AI coding era.",
-    `Module: ${module.title}`,
-    `Mental model: ${module.theme}`,
-    `Practice scenario: ${practice.scenario}`,
-    `Deliverable: ${practice.deliverable}`,
-    `Constraints: ${practice.constraints.join(" | ")}`,
-    `Docs snapshot: Spring Boot ${DOCS_SNAPSHOT.currentStable}, checked ${DOCS_SNAPSHOT.checkedOn}. Ask me to verify official docs before production version choices.`,
-  ];
-
-  const modes = {
-    socratic: [
-      "Mode: Socratic hint.",
-      "Do not give me the full answer first.",
-      "Ask one focused question at a time.",
-      "If I am stuck, give a small hint and one concrete next action.",
-      "Keep me responsible for the architecture decision.",
-    ],
-    review: [
-      "Mode: senior code/design review.",
-      "Find missing boundaries, weak tests, unsafe defaults, unclear configuration, and production risks.",
-      "Return findings first, ordered by severity.",
-      "Suggest one small improvement I can apply in 15 minutes.",
-    ],
-    pair: [
-      "Mode: pair programmer.",
-      "Work in short steps.",
-      "Before showing code, ask me to predict the next design move.",
-      "When code appears, keep it minimal and explain which architectural decision it expresses.",
-    ],
-  };
+  const shared = ui.coachPromptShared.map((line) =>
+    interpolate(line, {
+      moduleTitle: module.title,
+      moduleTheme: module.theme,
+      practiceScenario: practice.scenario,
+      practiceDeliverable: practice.deliverable,
+      practiceConstraints: practice.constraints.join(" | "),
+      springVersion: docs.currentStable,
+      checkedOn: docs.checkedOn,
+    }),
+  );
 
   const scratch = note.trim()
-    ? ["My current scratchpad:", note.trim()]
-    : ["My current scratchpad is empty. Start by helping me frame the work."];
+    ? [ui.coachPromptScratchpad, note.trim()]
+    : [ui.coachPromptEmptyScratchpad];
 
-  return [...shared, "", ...modes[mode], "", ...scratch].join("\n");
+  return [...shared, "", ...(ui.coachPromptModes[mode] || ui.coachPromptModes.socratic), "", ...scratch].join("\n");
 }
 
 function renderTimer() {
   $("#timer-display").textContent = formatSeconds(state.timerSeconds);
-  $("#start-timer").textContent = timerId ? "Pause" : "Start";
+  $("#start-timer").textContent = timerId ? t("timerPause") : t("timerStart");
 }
 
 function formatSeconds(totalSeconds) {
@@ -1281,7 +1525,7 @@ function formatSeconds(totalSeconds) {
 }
 
 function setSelectedModule(moduleId) {
-  const module = MODULES.find((item) => item.id === moduleId);
+  const module = modules().find((item) => item.id === moduleId);
   if (!module) return;
   state.selectedModule = module.id;
   state.timerSeconds = module.practice.minutes * 60;
@@ -1319,7 +1563,7 @@ function toggleTimer() {
   renderTimer();
 }
 
-async function copyText(text, status = "Copied.") {
+async function copyText(text, status = t("copied")) {
   try {
     await navigator.clipboard.writeText(text);
     setCopyStatus(status);
@@ -1351,19 +1595,19 @@ function buildPracticeCopy() {
   return [
     `# ${practice.title}`,
     "",
-    `Module: ${module.title}`,
-    `Timebox: ${practice.minutes} minutes`,
+    `${t("practiceCopyModule")} ${module.title}`,
+    t("practiceCopyTimebox", { minutes: practice.minutes }),
     "",
-    "## Scenario",
+    t("practiceCopyScenario"),
     practice.scenario,
     "",
-    "## Deliverable",
+    t("practiceCopyDeliverable"),
     practice.deliverable,
     "",
-    "## Constraints",
+    t("practiceCopyConstraints"),
     ...practice.constraints.map((constraint) => `- ${constraint}`),
     "",
-    "## Starter",
+    t("practiceCopyStarter"),
     practice.starter,
   ].join("\n");
 }
@@ -1372,39 +1616,40 @@ function buildExportPlan() {
   const done = completedCheckpointCount();
   const total = totalCheckpointCount();
   const module = selectedModule();
-  const completedLines = MODULES.map((item) => {
+  const completedLines = modules().map((item) => {
     const count = completedSet(item.id).size;
-    return `- ${item.number} ${item.title}: ${count}/${item.checkpoints.length} checkpoints`;
+    return `- ${item.number} ${item.title}: ${count}/${item.checkpoints.length} ${t("checks")}`;
   });
   const nextUnchecked =
     module.checkpoints.find((item) => !completedSet(module.id).has(item.id)) || module.checkpoints[0];
 
   return [
-    "# Spring Boot Architect Gym Plan",
+    t("planTitle"),
     "",
-    `Progress: ${done}/${total} checkpoints`,
-    `Current module: ${module.title}`,
-    `Next checkpoint: ${nextUnchecked.title}`,
-    `Practice drill: ${module.practice.title}`,
+    t("planProgress", { done, total }),
+    t("planCurrentModule", { title: module.title }),
+    t("planNextCheckpoint", { title: nextUnchecked.title }),
+    t("planPracticeDrill", { title: module.practice.title }),
     "",
-    "## Track status",
+    t("planTrackStatus"),
     ...completedLines,
     "",
-    "## Next 30 minutes",
-    "1. Review the current module mental model.",
-    `2. Complete checkpoint: ${nextUnchecked.title}.`,
-    `3. Run the drill: ${module.practice.title}.`,
-    "4. Paste the coach prompt into your LLM and ask for review.",
+    t("planNext30"),
+    t("planStep1"),
+    t("planStep2", { title: nextUnchecked.title }),
+    t("planStep3", { title: module.practice.title }),
+    t("planStep4"),
     "",
-    "## Coach prompt",
+    t("planCoachPrompt"),
     buildCoachPrompt(module, state.coachMode),
   ].join("\n");
 }
 
 function chooseRandomModule() {
-  const currentIndex = MODULES.findIndex((module) => module.id === state.selectedModule);
-  const candidates = MODULES.filter((_, index) => index !== currentIndex);
-  const next = candidates[Math.floor(Math.random() * candidates.length)] || MODULES[0];
+  const moduleList = modules();
+  const currentIndex = moduleList.findIndex((module) => module.id === state.selectedModule);
+  const candidates = moduleList.filter((_, index) => index !== currentIndex);
+  const next = candidates[Math.floor(Math.random() * candidates.length)] || moduleList[0];
   setSelectedModule(next.id);
   state.activeView = "practice";
   saveState();
@@ -1412,6 +1657,14 @@ function chooseRandomModule() {
 }
 
 document.addEventListener("click", (event) => {
+  const languageButton = event.target.closest("[data-language]");
+  if (languageButton) {
+    state.language = languageButton.dataset.language;
+    saveState();
+    renderAll();
+    return;
+  }
+
   const moduleButton = event.target.closest("[data-module]");
   if (moduleButton) {
     setSelectedModule(moduleButton.dataset.module);
@@ -1494,7 +1747,7 @@ document.addEventListener("click", (event) => {
   }
 
   if (event.target.closest("[data-copy-practice]")) {
-    copyText(buildPracticeCopy(), "Practice drill copied.");
+    copyText(buildPracticeCopy(), t("practiceCopied"));
     return;
   }
 });
@@ -1507,7 +1760,7 @@ $("#global-search").addEventListener("input", (event) => {
 });
 
 $("#copy-prompt").addEventListener("click", () => {
-  copyText($("#coach-prompt").value, "Coach prompt copied.");
+  copyText($("#coach-prompt").value, t("promptCopied"));
 });
 
 $("#shuffle-drill").addEventListener("click", chooseRandomModule);
@@ -1515,14 +1768,14 @@ $("#shuffle-drill").addEventListener("click", chooseRandomModule);
 $("#start-timer").addEventListener("click", toggleTimer);
 
 $("#export-plan").addEventListener("click", () => {
-  copyText(buildExportPlan(), "Learning plan copied.");
+  copyText(buildExportPlan(), t("planCopied"));
 });
 
 $("#reset-progress").addEventListener("click", () => {
-  const shouldReset = window.confirm("Reset local progress and notes for this browser?");
+  const shouldReset = window.confirm(t("resetConfirm"));
   if (!shouldReset) return;
   stopTimer();
-  state = { ...defaultState };
+  state = { ...defaultState, language: state.language };
   saveState();
   renderAll();
 });

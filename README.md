@@ -12,6 +12,11 @@ This is not meant to be another CRUD tutorial. Coding agents can scaffold CRUD q
 - LLM coach prompt generation for hint, review, and pair-programming modes.
 - A dependency radar that separates learn-now topics from later or legacy topics.
 - Architecture lab scenarios for decision practice and ADR thinking.
+- English and Simplified Chinese language support with a persisted in-app switcher.
+
+## Localization
+
+The app ships with English as the fallback language and Simplified Chinese as the first localized experience. Translated UI strings and learning content live in `i18n.js`; the core rendering logic in `app.js` falls back to English when a locale or key is missing.
 
 ## Run locally
 
