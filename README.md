@@ -7,7 +7,7 @@ This is not meant to be another CRUD tutorial. Coding agents can scaffold CRUD q
 ## What is included
 
 - A static GitHub Pages-ready app with no build step.
-- A six-module Spring Boot learning path.
+- A guided six-module Spring Boot learning path with next-step cues.
 - Hands-on practice drills with scratchpads and local progress tracking.
 - LLM coach prompt generation for hint, review, and pair-programming modes.
 - A dependency radar that separates learn-now topics from later or legacy topics.

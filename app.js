@@ -756,8 +756,37 @@ const UI_EN = {
   curriculumAria: "Curriculum",
   progressLabel: "Practice progress",
   progressCopy: "{done} of {total} checkpoints complete",
-  tracksEyebrow: "Tracks",
-  tracksTitle: "Rookie to architect",
+  tracksEyebrow: "Guided route",
+  tracksTitle: "Follow the path",
+  nextStepEyebrow: "Next step",
+  nextStepTitle: "Your clearest move",
+  nextStepCheckpoint: "Checkpoint",
+  nextStepNextModule: "Next module",
+  pathGuideAria: "Guided learning path",
+  guidanceEyebrow: "Guided path",
+  guidanceTitle: "Learn Spring Boot in a clear order",
+  guidanceCopy:
+    "Work the same loop in every module: build the mental model, prove one checkpoint, run the drill, then ask the coach to review your assumptions.",
+  focusNow: "Focus now",
+  pathStatusComplete: "Done",
+  pathStatusCurrent: "Now",
+  pathStatusReady: "Next",
+  pathStatusOpen: "Open",
+  pathProgress: "{done}/{total}",
+  guideStepModelTitle: "Model first",
+  guideStepModelCopy: "Read the mental model and runtime map before touching code.",
+  guideStepCheckpointTitle: "Prove it",
+  guideStepCheckpointCopy: "Complete the next checkpoint in your own words.",
+  guideStepPracticeTitle: "Practice and review",
+  guideStepPracticeCopy: "Draft the drill, score it, then ask the coach to challenge weak assumptions.",
+  moduleCompleteTitle: "Module checkpoints complete",
+  moduleCompleteCopy: "Run the practice drill or jump to the next unfinished module.",
+  pathCompleteTitle: "Path complete",
+  pathCompleteCopy: "Every checkpoint is complete. Use the lab and coach to turn the path into portfolio-grade decisions.",
+  startCheckpoint: "Start checkpoint",
+  openPractice: "Open practice",
+  openLab: "Open lab",
+  continueModule: "Continue module",
   learningViewsAria: "Learning views",
   tabLearn: "Learn",
   tabPractice: "Practice",
@@ -1064,6 +1093,24 @@ function isModuleComplete(module) {
   return completedSet(module.id).size === module.checkpoints.length;
 }
 
+function moduleProgress(module) {
+  const done = completedSet(module.id).size;
+  const total = module.checkpoints.length;
+  const percent = total ? Math.round((done / total) * 100) : 0;
+  const nextCheckpoint = module.checkpoints.find((item) => !completedSet(module.id).has(item.id));
+  return {
+    done,
+    total,
+    percent,
+    complete: total > 0 && done === total,
+    nextCheckpoint,
+  };
+}
+
+function nextIncompleteModule() {
+  return modules().find((module) => !moduleProgress(module).complete);
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -1077,6 +1124,7 @@ function renderAll() {
   renderStaticTranslations();
   renderTopControls();
   renderProgress();
+  renderGuidancePanel();
   renderModuleList();
   renderTabs();
   renderLearnView();
@@ -1128,9 +1176,52 @@ function renderProgress() {
   $("#progress-copy").textContent = t("progressCopy", { done, total });
 }
 
+function renderGuidancePanel() {
+  const panel = $("#next-step-panel");
+  const module = selectedModule();
+  const progress = moduleProgress(module);
+  const nextModule = nextIncompleteModule();
+  const allComplete = !nextModule;
+  let label = t("nextStepCheckpoint");
+  let title = progress.nextCheckpoint?.title || t("moduleCompleteTitle");
+  let copy = progress.nextCheckpoint?.copy || t("moduleCompleteCopy");
+  let action = `<button class="primary-button full-width" type="button" data-scroll-checkpoints>${escapeHtml(t("startCheckpoint"))}</button>`;
+
+  if (progress.complete && nextModule && nextModule.id !== module.id) {
+    label = t("nextStepNextModule");
+    title = nextModule.title;
+    copy = nextModule.theme;
+    action = `<button class="primary-button full-width" type="button" data-module="${nextModule.id}">${escapeHtml(t("continueModule"))}</button>`;
+  } else if (allComplete) {
+    label = t("pathCompleteTitle");
+    title = t("pathCompleteTitle");
+    copy = t("pathCompleteCopy");
+    action = `<button class="primary-button full-width" type="button" data-view="lab">${escapeHtml(t("openLab"))}</button>`;
+  }
+
+  panel.innerHTML = `
+    <div class="section-heading">
+      <p class="eyebrow">${escapeHtml(t("nextStepEyebrow"))}</p>
+      <h2>${escapeHtml(t("nextStepTitle"))}</h2>
+    </div>
+    <div class="next-step-meta">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(t("pathProgress", { done: progress.done, total: progress.total }))}</strong>
+    </div>
+    <h3>${escapeHtml(title)}</h3>
+    <p class="muted-copy">${escapeHtml(copy)}</p>
+    <div class="rail-progress" aria-hidden="true">
+      <span style="width: ${progress.percent}%"></span>
+    </div>
+    ${action}
+  `;
+}
+
 function renderModuleList() {
   const list = $("#module-list");
-  const filtered = modules().filter((module) => matchesSearch(moduleSearchText(module)));
+  const moduleList = modules();
+  const firstOpenIndex = moduleList.findIndex((module) => !moduleProgress(module).complete);
+  const filtered = moduleList.filter((module) => matchesSearch(moduleSearchText(module)));
 
   if (!filtered.length) {
     list.innerHTML = `<div class="empty-state">${escapeHtml(t("noModuleMatches"))}</div>`;
@@ -1139,17 +1230,24 @@ function renderModuleList() {
 
   list.innerHTML = filtered
     .map((module) => {
-      const done = completedSet(module.id).size;
-      const total = module.checkpoints.length;
-      const complete = isModuleComplete(module);
+      const progress = moduleProgress(module);
+      const index = moduleList.findIndex((item) => item.id === module.id);
+      const statusKey = progress.complete
+        ? "pathStatusComplete"
+        : module.id === state.selectedModule
+          ? "pathStatusCurrent"
+          : index === firstOpenIndex
+            ? "pathStatusReady"
+            : "pathStatusOpen";
       return `
         <button class="module-button ${module.id === state.selectedModule ? "active" : ""}" type="button" data-module="${module.id}">
           <span class="module-number">${module.number}</span>
           <span>
             <span class="module-title">${escapeHtml(module.title)}</span>
-            <span class="module-meta">${done}/${total} ${escapeHtml(t("checks"))} - ${module.minutes} ${escapeHtml(t("min"))}</span>
+            <span class="module-meta">${escapeHtml(t("pathProgress", { done: progress.done, total: progress.total }))} ${escapeHtml(t("checks"))} - ${module.minutes} ${escapeHtml(t("min"))}</span>
+            <span class="module-progress" aria-hidden="true"><span style="width: ${progress.percent}%"></span></span>
           </span>
-          <span class="module-check" aria-label="${complete ? escapeHtml(t("complete")) : escapeHtml(t("incomplete"))}">${complete ? escapeHtml(t("doneMark")) : ""}</span>
+          <span class="module-check ${progress.complete ? "complete" : ""}" aria-label="${progress.complete ? escapeHtml(t("complete")) : escapeHtml(t("incomplete"))}">${escapeHtml(t(statusKey))}</span>
         </button>
       `;
     })
@@ -1173,8 +1271,50 @@ function renderLearnView() {
   const docs = docsSnapshot();
   const done = completedSet(module.id);
   const quizAnswers = state.quiz[module.id] || {};
+  const progress = moduleProgress(module);
+  const focusTitle = progress.nextCheckpoint?.title || module.practice.title;
+  const focusCopy = progress.nextCheckpoint?.copy || t("moduleCompleteCopy");
+  const focusAction = progress.nextCheckpoint
+    ? `<button class="primary-button" type="button" data-scroll-checkpoints>${escapeHtml(t("startCheckpoint"))}</button>`
+    : `<button class="primary-button" type="button" data-view="practice">${escapeHtml(t("openPractice"))}</button>`;
+  const guidePhase = progress.done === 0 ? "model" : progress.complete ? "practice" : "checkpoint";
 
   $("#view-learn").innerHTML = `
+    <section class="path-guide" aria-label="${escapeHtml(t("pathGuideAria"))}">
+      <div class="path-guide-copy">
+        <div class="section-heading">
+          <p class="eyebrow">${escapeHtml(t("guidanceEyebrow"))}</p>
+          <h2>${escapeHtml(t("guidanceTitle"))}</h2>
+        </div>
+        <p>${escapeHtml(t("guidanceCopy"))}</p>
+      </div>
+      <div class="guide-steps">
+        <article class="guide-step ${guidePhase === "model" ? "active" : ""}">
+          <span>01</span>
+          <strong>${escapeHtml(t("guideStepModelTitle"))}</strong>
+          <p>${escapeHtml(t("guideStepModelCopy"))}</p>
+        </article>
+        <article class="guide-step ${guidePhase === "checkpoint" ? "active" : ""}">
+          <span>02</span>
+          <strong>${escapeHtml(t("guideStepCheckpointTitle"))}</strong>
+          <p>${escapeHtml(t("guideStepCheckpointCopy"))}</p>
+        </article>
+        <article class="guide-step ${guidePhase === "practice" ? "active" : ""}">
+          <span>03</span>
+          <strong>${escapeHtml(t("guideStepPracticeTitle"))}</strong>
+          <p>${escapeHtml(t("guideStepPracticeCopy"))}</p>
+        </article>
+      </div>
+      <div class="focus-strip">
+        <div>
+          <span>${escapeHtml(t("focusNow"))}</span>
+          <strong>${escapeHtml(focusTitle)}</strong>
+          <p>${escapeHtml(focusCopy)}</p>
+        </div>
+        ${focusAction}
+      </div>
+    </section>
+
     <div class="learn-grid">
       <section class="hero-panel">
         <div class="tag-row">
@@ -1239,7 +1379,7 @@ function renderLearnView() {
       ${module.lesson.map((paragraph) => `<p class="text-block">${escapeHtml(paragraph)}</p>`).join("")}
     </section>
 
-    <section class="lesson-panel">
+    <section class="lesson-panel" data-checkpoint-panel>
       <div class="section-heading">
         <p class="eyebrow">${escapeHtml(t("handsDirty"))}</p>
         <h3>${escapeHtml(t("checkpointChecklist"))}</h3>
@@ -1668,6 +1808,19 @@ document.addEventListener("click", (event) => {
   const moduleButton = event.target.closest("[data-module]");
   if (moduleButton) {
     setSelectedModule(moduleButton.dataset.module);
+    return;
+  }
+
+  if (event.target.closest("[data-scroll-checkpoints]")) {
+    state.activeView = "learn";
+    saveState();
+    renderAll();
+    window.requestAnimationFrame(() => {
+      document.querySelector("[data-checkpoint-panel]")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
     return;
   }
 
